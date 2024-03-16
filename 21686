@@ -1,0 +1,119 @@
+j<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title></title>
+<style type="text/css">
+*{
+margin:0;padding:0;
+box-sizing:border-box;
+}
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background-color:gray;
+color:blue;
+}.container{
+position:relative;
+perspective:1500px;
+transform-style:preserve-3d;
+}
+.clock{
+width:200px;
+height:200px;
+background-color:white;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+box-shadow: 0px 9px 20px rgba(13, 38, 76, 0.19);
+
+}
+span{ 
+transform:rotate(calc(30deg*var(--i)));
+position:absolute;
+inset:12px;
+text-align:center;
+
+
+}
+span b{
+display:inline-block;
+transform:rotate(calc(-30deg*var(--i)));
+font-size:17px;
+
+}
+.clock::before{
+content:"";
+width:17px;
+height:17px;
+border-radius:50%;
+position:absolute;
+background-color:black;
+}
+.clickline{
+position:absolute;
+justify-content:center;
+align-items:flex-end;
+display:flex;
+background-color:blue;
+}
+.clickline i{
+width:4px;
+height:70px;
+background-color:black;
+position:absolute;
+border-radius:10px;
+justify-content:center;
+align-items:center;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+<div class="clock">
+<div class="clickline hour"><i></i></div>
+<div class="clickline sec"><i></i></div>
+<div class="clickline min"><i></i></div>
+<span style="--i:1;"><b>1</b></span>
+<span style="--i:2;"><b>2</b></span>
+<span style="--i:3;"><b>3</b></span>
+<span style="--i:4;"><b>4</b></span>
+<span style="--i:5;"><b>5</b></span>
+<span style="--i:6;"><b>6</b></span>
+<span style="--i:7;"><b>7</b></span>
+<span style="--i:8;"><b>8</b></span>
+<span style="--i:9;"><b>9</b></span>
+<span style="--i:10;"><b>10</b></span>
+<span style="--i:11;"><b>11</b></span>
+<span style="--i:12;"><b>12</b></span>
+
+</div>
+
+
+</div>
+<script>
+  
+function UpdateClock(){
+        const sechand=document.getElementsByClassName("sec");
+    const hourshand=document.getElementsByClassName("hour");
+    const minhand=document.getElementsByClassName("min");
+    const datee=new Date();
+  
+    const minit=datee.getMinutes()*6;
+      const hour=datee.getHours()* 30 + Math.round(minit/12);
+    const sec=datee.getSeconds()*6;
+    console.log(sec);
+    sechand[0].style.transform=`rotate(${sec}deg)`;
+     hourshand[0].style.transform=`rotate(${hour}deg)`;
+     minhand[0].style.transform=`rotate(${minit}deg)`;
+    
+    
+   setTimeout(UpdateClock,1000); 
+}
+  UpdateClock();  
+</script>
+</body>
+</html>
